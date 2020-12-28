@@ -12,7 +12,6 @@ import Topic from "./topic_pages/Topic"
 
 function Topics() {
     let match = useRouteMatch();
-
     return (
         <div>
             <h2>Topics</h2>
@@ -24,7 +23,12 @@ function Topics() {
                 <li>
                     <Link to={`${match.url}/props-v-state`}>
                         Props v. State
-            </Link>
+                    </Link>
+                </li>
+                <li>
+                    <Link to={`${match.url}/next-topic`}>
+                        next-topic
+                    </Link>
                 </li>
             </ul>
 
@@ -38,6 +42,7 @@ function Topics() {
                 </Route>
                 <Route path={match.path}>
                     <h3>Please select a topic.</h3>
+                    <p>in this place we have acces to match.pach witch is homepage/topisc</p>
                 </Route>
             </Switch>
         </div>

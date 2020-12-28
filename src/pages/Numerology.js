@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
 import allNumerologicsByDate from "../components/numerologicNumbers"
+import { connect } from 'react-redux'
 
-function Numerology() {
+function Numerology(props) {
     const dates = allNumerologicsByDate(2020, 2020);
     let table = "";
     const showDatesInTable = dates.map((element) => {
@@ -9,9 +10,20 @@ function Numerology() {
     })
 
     return <>
-        {console.log(showDatesInTable)}
+        {console.log(dates)}
         {showDatesInTable}
         <h2>Numerology Welcome</h2>
     </>
 }
-export default Numerology
+
+const mapStateToProps = (state, ownProps) => ({
+    arrayOfDates: state.numerology.arrayOfDates,
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // CHANGE_DATES: (fields, id) => dispatch(setBetAction(fields, id)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Numerology)
