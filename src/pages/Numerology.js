@@ -1,18 +1,24 @@
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import allNumerologicsByDate from "../components/numerologicNumbers"
 import { connect } from 'react-redux'
+import { updateDates } from "../actions/numerologyActions.js";
 
 function Numerology(props) {
-    const dates = allNumerologicsByDate(2020, 2020);
     let table = "";
-    const showDatesInTable = dates.map((element) => {
-        return <p>{element.data} + {element.numerologicNumber}</p>
+    const showDatesInTable = props.arrayOfDates.map((element) => {
+        return <p key={element.data}>{element.data} + {element.numerologicNumber}</p>
     })
-
+    console.log(props)
+    const handleClick = () => {
+        console.log("click")
+        props.updateDates2(allNumerologicsByDate(2020, 2020));
+        console.log("after click", props.arrayOfDates)
+    }
     return <>
-        {console.log(dates)}
-        {showDatesInTable}
+        {/* {showDatesInTable} */}
         <h2>Numerology Welcome</h2>
+        <button onClick={handleClick}>dispatch_updatedates</button>
+        {showDatesInTable}
     </>
 }
 
@@ -22,7 +28,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // CHANGE_DATES: (fields, id) => dispatch(setBetAction(fields, id)),
+        updateDates2: (dates) => dispatch(updateDates(dates)),
     };
 };
 
