@@ -1,11 +1,21 @@
-import { useMemo } from 'react'
-import allNumerologicsByDate from "../components/numerologicNumbers"
-
+import allNumerologicsByDate from "./../components/numerologicNumbers";
+import { useMemo, useEffect, useState, useCallback } from "react";
+import React from "react";
 function Numerology() {
-    const dates = allNumerologicsByDate(2020, 2020);
+  const [numerologic, setNumerologic] = useState({});
 
-    return <>
-        <h2>Numerology Welcome</h2>
+  const dates = allNumerologicsByDate(2020, 2020);
+  const showDates = dates.map((element) => (
+    <p key={element.data}>
+      {element.data} - {element.numerologicNumber}
+    </p>
+  ));
+
+  return (
+    <>
+      {showDates}
+      <h2>Numerology Welcome</h2>
     </>
+  );
 }
-export default Numerology
+export default React.memo(Numerology);

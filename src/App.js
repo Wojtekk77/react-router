@@ -1,59 +1,35 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams,
-} from "react-router-dom";
-import About from "./pages/About";
-import Home from "./pages/Home";
-import Numerology from "./pages/Numerology";
-import Topics from "./pages/Topics";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router } from "react-router-dom";
+import Aside from "./components/aside/Aside";
 import styled, { ThemeProvider } from "styled-components";
 import GlobalStyle from "./theme/globalStyles";
 import Theme from "./theme/theme";
+import { Row, Col, Container } from "react-bootstrap";
+const StyledAside = styled.div`
+  margin: 50px;
+  color: red;
+  background-color: blue;
+`;
 
 export default function App() {
   return (
     <>
-      <Router>
-        <GlobalStyle />
-        <ThemeProvider theme={Theme}>
-          <div>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/topics">Topics</Link>
-              </li>
-              <li>
-                <Link to="/numerology">Numerology</Link>
-              </li>
-            </ul>
-
-            <Switch>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/topics">
-                <Topics />
-              </Route>
-              <Route path="/numerology">
-                <Numerology />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
-          </div>
-        </ThemeProvider>
-      </Router>
+      <GlobalStyle />
+      <ThemeProvider theme={Theme}>
+        <Container>
+          <StyledAside>
+            <Aside />
+          </StyledAside>
+        </Container>
+      </ThemeProvider>
+      <Container>
+        <Row>
+          <Col xs>First, but unordered</Col>
+          <Col xs={{ order: 12 }}>Second, but last</Col>
+          <Col xs={{ order: 1 }}>Third, but second</Col>
+        </Row>
+      </Container>
     </>
   );
 }
