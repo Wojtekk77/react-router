@@ -8,7 +8,7 @@ const list = [
   { name: "Topics", path: "/topics" },
   { name: "Numerology", path: "/numerology" },
   { name: "Movie-Reviews", path: "/movie-reviews" },
-  { name: "Events", path: "/events" },
+  { name: "Events", path: "/events", exact: true },
   { name: "StockMarket", path: "/stock-market" },
 ];
 

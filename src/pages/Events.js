@@ -1,6 +1,5 @@
+import React from "react";
 import { connect } from "react-redux";
-import { Container, Row, Col } from "react-bootstrap";
-import styled from "styled-components";
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,53 +8,38 @@ import {
   useRouteMatch,
   useParams,
 } from "react-router-dom";
-import EventPage from "./EventPages/EventPage";
-
-const StyledHeaderBox = styled.div`
-  color: palevioletred;
-  min-height: 65px;
-`;
-
-const StyledH4 = styled.h4`
-  font-size: 1.1rem;
-`;
+import Event from "./EventPages/Event";
+import { Col, Row } from "react-bootstrap";
 
 function Events({ EventList }) {
   let match = useRouteMatch();
-  console.log("im in events", EventList);
-
   const events = EventList.map((event) => {
     return (
-      <Col key={event.id} md={5} lg={3} className="box card m-1 py-2">
-        <StyledHeaderBox className="boxHeader">
-          <StyledH4>{event.name} </StyledH4>
-        </StyledHeaderBox>
-        <div className="boxMain">
-          <p>data: {event.event_date}</p>
-          <p>dosptępność: {event.status}</p>
+      <Col key={event.id} md={5} className="card m-1">
+        <div>
+          <h5>{event.name}</h5>
         </div>
-        <div className="boxFooter">
-          <p>
-            <Link to={`${match.url}/${event.id}`}>Zobacz Event:</Link>
-          </p>
+        <div>data:{event.event_date}</div>
+        <div>
+          Zobacz szczegóły:
+          <Link to={`${match.url}/${event.id}`}>event:id{event.id}</Link>
         </div>
       </Col>
     );
   });
-
   return (
-    <>
-      <Container>
-        <Row>{events}</Row>
-      </Container>
+    <div>
       <Switch>
-        <Route path={`${match.path}/:id`}>
-          <EventPage />
+        <Route path={`${match.path}/:eventId`}>
+          <Event />
         </Route>
       </Switch>
-    </>
+      <h2>Events</h2>
+      <Row>{events}</Row>
+    </div>
   );
 }
+
 function mapStateToProps(state) {
   return { EventList: state.events.EventList };
 }

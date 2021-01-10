@@ -15,9 +15,8 @@ import Numerology from "../pages/Numerology";
 import MovieReviews from "../pages/MovieReviews";
 import Topics from "../pages/Topics";
 import Events from "../pages/Events";
-import EventPage from "../pages/EventPages/EventPage";
 import StockMarket from "../pages/StockMarket";
-
+import Event from "../pages/EventPages/Event";
 const Page = () => {
   return (
     <>
@@ -27,9 +26,10 @@ const Page = () => {
         <Route path="/numerology" component={Numerology} />
         <Route path="/movie-reviews" component={MovieReviews} />
         <Route path="/topics" component={Topics} />
-        <Route path="/events/:id" component={EventPage} />
-        <Route path="/events" component={Events} />
+        <Route path="/events" exact component={Events} />
+        <Route path="/events/:id" component={Event} />
         <Route path="/stock-market" component={StockMarket} />
+
         {/* <Route path="/login" component={LoginPage} /> */}
         {/* <Route component={ErrorPage} /> */}
       </Switch>

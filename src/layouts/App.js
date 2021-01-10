@@ -6,7 +6,7 @@ import Page from "./Page";
 import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/App.css";
-
+import { Container, Col, Row } from "react-bootstrap";
 class App extends Component {
   render() {
     return (
@@ -14,8 +14,16 @@ class App extends Component {
         <div className="app">
           <header>{<Header />}</header>
           <main>
-            <aside>{<Navigation />}</aside>
-            <section className="page">{<Page />}</section>
+            <Container>
+              <Row>
+                <Col xs={3}>
+                  <aside>{<Navigation />}</aside>
+                </Col>
+                <Col xs={9}>
+                  <section className="page">{<Page />}</section>
+                </Col>
+              </Row>
+            </Container>
           </main>
           <footer>{<Footer />}</footer>
         </div>

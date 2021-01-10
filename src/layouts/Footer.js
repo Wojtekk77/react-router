@@ -9,7 +9,7 @@ const Footer = () => {
         path="/"
         exact
         render={(props) => {
-          console.log(props);
+          // console.log(props);
           return (
             <p>
               Jesteś na <span>stronie głównej1</span>
@@ -22,7 +22,7 @@ const Footer = () => {
         path="/:page"
         exact
         render={(props) => {
-          console.log(props);
+          // console.log(props);
           return (
             <>
               <p>
@@ -43,7 +43,7 @@ const Footer = () => {
         path="/:page/:eventId"
         exact
         render={(props) => {
-          console.log(props);
+          // console.log(props);
           return (
             <>
               <p>
