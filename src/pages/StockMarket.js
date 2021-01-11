@@ -1,70 +1,104 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Axios from "axios";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { addCompanyToMarket } from "../actions/stockActions";
+import { Col, Row } from "react-bootstrap";
 
 const finnhub = require("finnhub");
 
-
 function StockMarket({ addCompanyToStore, marketIndices }) {
-  const apiKey = "bvsu6ov48v6rku8bemsg"
-  const api_key = finnhub.ApiClient.instance.authentications["api_key"];
-  api_key.apiKey = "bvsu6ov48v6rku8bemsg"; // Replace this
-  const finnhubClient = new finnhub.DefaultApi();
+  // const apiKey = "bvsu6ov48v6rku8bemsg";
+  // const api_key = finnhub.ApiClient.instance.authentications["api_key"];
+  // api_key.apiKey = "bvsu6ov48v6rku8bemsg"; // Replace this
+  // const finnhubClient = new finnhub.DefaultApi();
 
-  // Stock candles
-  finnhubClient.stockCandles(
-    "AAPL",
-    "D",
-    1590988249,
-    1591852249,
-    {},
-    (error, data, response) => {
-      // console.log("aplle?", data);
-    }
-  );
+  // // Stock candles
+  // finnhubClient.stockCandles(
+  //   "AAPL",
+  //   "D",
+  //   1590988249,
+  //   1591852249,
+  //   {},
+  //   (error, data, response) => {
+  //     // console.log("aplle?", data);
+  //   }
+  // );
 
+  // const getDataFromApi = () => {
+  //   Axios.get(
+  //     `https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=${apiKey}`
+  //   ).then((res, err) => {
+  //     // console.log("res", res.data.constituents);
+  //   });
+  // };
 
-  const getDataFromApi = () => {
-    Axios.get(`https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=${apiKey}`).then((res, err) => {
-      // console.log("res", res.data.constituents);
-    });
-  };
+  // getDataFromApi();
 
-  getDataFromApi()
-
-  // console.log("market", marketIndices)
-  finnhubClient.country((error, data, response) => {
-    // console.log("countries", data);
-    data.map((data) => {
-      if (data.country === "Poland") {
-        // console.log("Pol", data);
-      }
-    });
-  });
+  // // console.log("market", marketIndices)
+  // finnhubClient.country((error, data, response) => {
+  //   // console.log("countries", data);
+  //   data.map((data) => {
+  //     if (data.country === "Poland") {
+  //       // console.log("Pol", data);
+  //     }
+  //   });
+  // });
 
   const handleClickAddCompanyToIndex = () => {
-    // console.log("dwa dwa")
-    addCompanyToStore(marketIndices, ["KKK", "DDD"], "WIG");
-  }
+    addCompanyToStore(
+      marketIndices,
+      ["-wiem,ze nic nie wiem-", "drugi raz"],
+      "WIG"
+    );
+  };
 
-  return <><div>Into StockMarket</div>
-    <button onClick={handleClickAddCompanyToIndex}>BUTTON</button>
-    <p>{marketIndices.SP500}</p>
-    <p>{marketIndices.WIG}</p>
-  </>;
+  const getCompaniesWithIndex = () => {
+    let companyBox = "";
+    let indicesBox = "";
+    console.log(marketIndices);
+    indicesBox = marketIndices.map((index) => {
+      for (let key in index) {
+        companyBox = index[key].map((n) => {
+          return (
+            <Col>
+              <div>Company: {n}</div>
+              <div>Index: </div>
+              <div>Link: </div>
+            </Col>
+          );
+        });
+      }
+      return companyBox;
+    });
+    return indicesBox;
+  };
+  let companies = getCompaniesWithIndex();
+
+  // useEffect(() => {
+  //   companies = getCompaniesWithIndex();
+  // }, [marketIndices]);
+
+  console.log(marketIndices);
+
+  return (
+    <>
+      <div>Into StockMarket</div>
+      <button onClick={handleClickAddCompanyToIndex}>BUTTON</button>
+      <Row>{companies}</Row>
+    </>
+  );
 }
 
-
 const mapStateToProps = (state) => ({
-  marketIndices: state.stock.marketIndices
-})
+  marketIndices: state.stock.marketIndices,
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCompanyToStore: (marketIndices, companies, index) => dispatch(addCompanyToMarket(marketIndices, companies, index))
-  }
-}
+    addCompanyToStore: (marketIndices, companies, index) =>
+      dispatch(addCompanyToMarket(marketIndices, companies, index)),
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(StockMarket)
+export default connect(mapStateToProps, mapDispatchToProps)(StockMarket);
