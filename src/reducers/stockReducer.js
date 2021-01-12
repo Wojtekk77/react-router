@@ -1,20 +1,20 @@
 const initialState = {
     marketIndices: [
-        { symbol: '^AXJO', name: 'ASX 20' },
-        { symbol: 'XIN9.FGI', name: 'China A50' },
-        { symbol: '^STOXX50E', name: 'Stoxx 50' },
-        { symbol: '^FCHI', name: 'CAC 40' },
-        { symbol: '^GDAXI', name: 'DAX' },
-        { symbol: '^HSI', name: 'Hang Seng' },
-        { symbol: '^N225', name: 'Nikkei 225' },
-        { symbol: '^NSEI', name: 'Nifty 50' },
-        { symbol: '^AEX', name: 'AEX index' },
-        { symbol: '^STI', name: 'Straits Times Index' },
-        { symbol: '^FTSE', name: 'FTSE 100' },
-        { symbol: '^NDX', name: 'Nasdaq 100' },
-        { symbol: '^RUT', name: 'Russel 2000' },
-        { symbol: '^GSPC', name: 'S&P 500' },
-        { symbol: '^DJI', name: 'Dow Jones' }
+        { symbol: '^AXJO', name: 'ASX 20', constituents: [] },
+        { symbol: 'XIN9.FGI', name: 'China A50', constituents: [] },
+        { symbol: '^STOXX50E', name: 'Stoxx 50', constituents: [] },
+        { symbol: '^FCHI', name: 'CAC 40', constituents: [] },
+        { symbol: '^GDAXI', name: 'DAX', constituents: [] },
+        { symbol: '^HSI', name: 'Hang Seng', constituents: [] },
+        { symbol: '^N225', name: 'Nikkei 225', constituents: [] },
+        { symbol: '^NSEI', name: 'Nifty 50', constituents: [] },
+        { symbol: '^AEX', name: 'AEX index', constituents: [] },
+        { symbol: '^STI', name: 'Straits Times Index', constituents: [] },
+        { symbol: '^FTSE', name: 'FTSE 100', constituents: [] },
+        { symbol: '^NDX', name: 'Nasdaq 100', constituents: [] },
+        { symbol: '^RUT', name: 'Russel 2000', constituents: [] },
+        { symbol: '^GSPC', name: 'S&P 500', constituents: [] },
+        { symbol: '^DJI', name: 'Dow Jones', constituents: [] }
     ],
 }
 

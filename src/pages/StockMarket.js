@@ -36,7 +36,12 @@ function StockMarket({ addCompanyToStore, marketIndices }) {
     })
   };
 
-  getDataFromApi();
+
+  useEffect(() => {
+    getDataFromApi()
+    return () => {
+    }
+  }, [])
 
   // // console.log("market", marketIndices)
   // finnhubClient.country((error, data, response) => {
@@ -56,23 +61,23 @@ function StockMarket({ addCompanyToStore, marketIndices }) {
   //   );
   // };
 
-  // const getCompaniesWithIndex = () => {
-  //   const companiesBoxes = marketIndices.map((indexData) => {
-  //     const companyBox = indexData.companies.map(company => {
-  //       return (
-  //         <Col>
-  //           <div>Company: {company}</div>
-  //           <div>Index: {indexData.id}</div>
-  //           <div>Link: </div>
-  //         </Col>
-  //       );
-  //     })
-  //     return companyBox;
-  //   });
-  //   return companiesBoxes;
-  // }
+  const getCompaniesWithIndex = () => {
+    const companiesBoxes = marketIndices.map((indexData) => {
+      const companyBox = indexData.constituents.map(company => {
+        return (
+          <Col xs={4} className="card p-1">
+            <div>Company: {company}</div>
+            <div>Index: {indexData.name}</div>
+            <div>Index symbol: {indexData.symbol} </div>
+          </Col>
+        );
+      })
+      return <Row>{companyBox}</Row>;
+    });
+    return companiesBoxes;
+  }
 
-  // let companies = getCompaniesWithIndex();
+  let companies = getCompaniesWithIndex();
 
   // useEffect(() => {
   //   companies = getCompaniesWithIndex();
@@ -84,7 +89,7 @@ function StockMarket({ addCompanyToStore, marketIndices }) {
     <>
       <div>Into StockMarket</div>
       {/* <button onClick={handleClickAddCompanyToIndex}>BUTTON</button> */}
-      {/* <Row>{companies}</Row> */}
+      <Row>{companies}</Row>
     </>
   );
 }
