@@ -8,10 +8,10 @@ import { Col, Row } from "react-bootstrap";
 const finnhub = require("finnhub");
 
 function StockMarket({ addCompanyToStore, marketIndices }) {
-  // const apiKey = "bvsu6ov48v6rku8bemsg";
-  // const api_key = finnhub.ApiClient.instance.authentications["api_key"];
-  // api_key.apiKey = "bvsu6ov48v6rku8bemsg"; // Replace this
-  // const finnhubClient = new finnhub.DefaultApi();
+  const apiKey = "bvsu6ov48v6rku8bemsg";
+  const api_key = finnhub.ApiClient.instance.authentications["api_key"];
+  api_key.apiKey = "bvsu6ov48v6rku8bemsg"; // Replace this
+  const finnhubClient = new finnhub.DefaultApi();
 
   // // Stock candles
   // finnhubClient.stockCandles(
@@ -25,15 +25,18 @@ function StockMarket({ addCompanyToStore, marketIndices }) {
   //   }
   // );
 
-  // const getDataFromApi = () => {
-  //   Axios.get(
-  //     `https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=${apiKey}`
-  //   ).then((res, err) => {
-  //     // console.log("res", res.data.constituents);
-  //   });
-  // };
+  const getDataFromApi = () => {
+    marketIndices.map(index => {
+      Axios.get(
+        `https://finnhub.io/api/v1/index/constituents?symbol=${index.symbol}&token=${apiKey}`
+      ).then((res, err) => {
+        console.log(res.data.symbol, res.data.constituents);
+        addCompanyToStore(marketIndices, res.data.constituents, res.data.symbol)
+      });
+    })
+  };
 
-  // getDataFromApi();
+  getDataFromApi();
 
   // // console.log("market", marketIndices)
   // finnhubClient.country((error, data, response) => {
@@ -45,31 +48,31 @@ function StockMarket({ addCompanyToStore, marketIndices }) {
   //   });
   // });
 
-  const handleClickAddCompanyToIndex = () => {
-    addCompanyToStore(
-      marketIndices,
-      ["-wiem,ze nic nie wiem-", "drugi raz"],
-      "WIG"
-    );
-  };
+  // const handleClickAddCompanyToIndex = () => {
+  //   addCompanyToStore(
+  //     marketIndices,
+  //     ["-wiem,ze nic nie wiem-", "drugi raz"],
+  //     "WIG"
+  //   );
+  // };
 
-  const getCompaniesWithIndex = () => {
-    const companiesBoxes = marketIndices.map((indexData) => {
-      const companyBox = indexData.companies.map(company => {
-        return (
-          <Col>
-            <div>Company: {company}</div>
-            <div>Index: {indexData.id}</div>
-            <div>Link: </div>
-          </Col>
-        );
-      })
-      return companyBox;
-    });
-    return companiesBoxes;
-  }
+  // const getCompaniesWithIndex = () => {
+  //   const companiesBoxes = marketIndices.map((indexData) => {
+  //     const companyBox = indexData.companies.map(company => {
+  //       return (
+  //         <Col>
+  //           <div>Company: {company}</div>
+  //           <div>Index: {indexData.id}</div>
+  //           <div>Link: </div>
+  //         </Col>
+  //       );
+  //     })
+  //     return companyBox;
+  //   });
+  //   return companiesBoxes;
+  // }
 
-  let companies = getCompaniesWithIndex();
+  // let companies = getCompaniesWithIndex();
 
   // useEffect(() => {
   //   companies = getCompaniesWithIndex();
@@ -80,8 +83,8 @@ function StockMarket({ addCompanyToStore, marketIndices }) {
   return (
     <>
       <div>Into StockMarket</div>
-      <button onClick={handleClickAddCompanyToIndex}>BUTTON</button>
-      <Row>{companies}</Row>
+      {/* <button onClick={handleClickAddCompanyToIndex}>BUTTON</button> */}
+      {/* <Row>{companies}</Row> */}
     </>
   );
 }

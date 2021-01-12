@@ -1,6 +1,6 @@
-export const addCompanyToMarket = (marketIndices, companies, index) => {
+export const addCompanyToMarket = (marketIndices, constituents, symbol) => {
   const newMarketIndex = marketIndices.map((indexData) => {
-    return indexData.id === index ? { ...indexData, companies: indexData.companies.concat(companies) } : indexData
+    return symbol === indexData.symbol ? { ...indexData, constituents: indexData.companies.concat(constituents) } : indexData
   })
 
   console.log("newMarket", newMarketIndex);
