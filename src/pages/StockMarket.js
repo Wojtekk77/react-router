@@ -54,32 +54,28 @@ function StockMarket({ addCompanyToStore, marketIndices }) {
   };
 
   const getCompaniesWithIndex = () => {
-    let companyBox = "";
-    let indicesBox = "";
-    console.log(marketIndices);
-    indicesBox = marketIndices.map((index) => {
-      for (let key in index) {
-        companyBox = index[key].map((n) => {
-          return (
-            <Col>
-              <div>Company: {n}</div>
-              <div>Index: </div>
-              <div>Link: </div>
-            </Col>
-          );
-        });
-      }
+    const companiesBoxes = marketIndices.map((indexData) => {
+      const companyBox = indexData.companies.map(company => {
+        return (
+          <Col>
+            <div>Company: {company}</div>
+            <div>Index: {indexData.id}</div>
+            <div>Link: </div>
+          </Col>
+        );
+      })
       return companyBox;
     });
-    return indicesBox;
-  };
+    return companiesBoxes;
+  }
+
   let companies = getCompaniesWithIndex();
 
   // useEffect(() => {
   //   companies = getCompaniesWithIndex();
   // }, [marketIndices]);
 
-  console.log(marketIndices);
+
 
   return (
     <>
