@@ -18,9 +18,9 @@ export const CompanyPage = ({ marketIndices, match }) => {
 
   let companies = index.constituents.map(company => {
     return (
-      <Col xs={4}><h4>{index.name}</h4>
-        <Link to={`${match.url}/${company}`}> {company}</Link>
-        <Link to="/stock-market">Cofnij</Link>
+      <Col xs={4}>
+        <div><h5><Link to={`${match.url}/${company}`}> {company}</Link></h5></div>
+
       </Col>
     )
   })
@@ -28,9 +28,17 @@ export const CompanyPage = ({ marketIndices, match }) => {
   console.log(marketIndices)
 
   return (
-    <Row>
-      {companies}
-    </Row>
+    <>
+      <Row><h2>{index.name}</h2></Row>
+      <Row>
+        {companies}
+      </Row>
+      <Row >
+        <div>
+          <Link to="/stock-market">Cofnij</Link>
+        </div>
+      </Row>
+    </>
   )
 }
 

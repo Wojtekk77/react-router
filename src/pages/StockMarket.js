@@ -39,7 +39,7 @@ function StockMarket({ addCompanyToStore, marketIndices, match }) {
       Axios.get(
         `https://finnhub.io/api/v1/index/constituents?symbol=${index.symbol}&token=${apiKey}`
       ).then((res) => {
-        // console.log(res.data.symbol, res.data.constituents);
+        console.log(res.data.symbol, res.data.constituents);
         addCompanyToStore(marketIndices, res.data.constituents, res.data.symbol)
       }).catch(err => console.log(err));;
     })
