@@ -21,7 +21,7 @@ const initialState = {
 export const stockReducer = (state = initialState, action) => {
     switch (action.type) {
         case "ADD_COMPANIES_TO_INDEX":
-            console.log("intoreducer")
+            console.log("I am in reducer")
             return { ...state, marketIndices: action.marketIndices };
         default:
             return state;

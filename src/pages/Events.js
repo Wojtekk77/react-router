@@ -29,11 +29,6 @@ function Events({ EventList }) {
   });
   return (
     <div>
-      <Switch>
-        <Route path={`${match.path}/:eventId`}>
-          <Event />
-        </Route>
-      </Switch>
       <h2>Events</h2>
       <Row>{events}</Row>
     </div>
@@ -43,5 +38,5 @@ function Events({ EventList }) {
 function mapStateToProps(state) {
   return { EventList: state.events.EventList };
 }
-function mapDispatchToProps() {}
+function mapDispatchToProps() { }
 export default connect(mapStateToProps)(Events);

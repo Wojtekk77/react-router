@@ -2,12 +2,21 @@ import React, { useEffect } from "react";
 import Axios from "axios";
 
 import { connect } from "react-redux";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams,
+} from "react-router-dom";
+import CompanyPage from "./CompanyPages/CompanyPage"
 import { addCompanyToMarket } from "../actions/stockActions";
 import { Col, Row } from "react-bootstrap";
 
 const finnhub = require("finnhub");
 
-function StockMarket({ addCompanyToStore, marketIndices }) {
+function StockMarket({ addCompanyToStore, marketIndices, match }) {
   const apiKey = "bvsu6ov48v6rku8bemsg";
   const api_key = finnhub.ApiClient.instance.authentications["api_key"];
   api_key.apiKey = "bvsu6ov48v6rku8bemsg"; // Replace this
@@ -29,10 +38,10 @@ function StockMarket({ addCompanyToStore, marketIndices }) {
     marketIndices.map(index => {
       Axios.get(
         `https://finnhub.io/api/v1/index/constituents?symbol=${index.symbol}&token=${apiKey}`
-      ).then((res, err) => {
-        console.log(res.data.symbol, res.data.constituents);
+      ).then((res) => {
+        // console.log(res.data.symbol, res.data.constituents);
         addCompanyToStore(marketIndices, res.data.constituents, res.data.symbol)
-      });
+      }).catch(err => console.log(err));;
     })
   };
 
@@ -77,19 +86,25 @@ function StockMarket({ addCompanyToStore, marketIndices }) {
     return companiesBoxes;
   }
 
-  let companies = getCompaniesWithIndex();
 
-  // useEffect(() => {
-  //   companies = getCompaniesWithIndex();
-  // }, [marketIndices]);
 
+  const indices = marketIndices.map(index => {
+    if (index.constituents.length > 0) {
+      return (<Col key={index.symbol} xs={3} className="card">
+        <Link to={`${match.url}/${index.symbol}`}>{index.name}
+        </Link>
+      </Col>)
+    }
+  })
 
 
   return (
     <>
       <div>Into StockMarket</div>
+      <Row>{indices}</Row>
+      {/* <Row>{companies}</Row> */}
       {/* <button onClick={handleClickAddCompanyToIndex}>BUTTON</button> */}
-      <Row>{companies}</Row>
+
     </>
   );
 }

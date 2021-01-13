@@ -17,6 +17,7 @@ import Topics from "../pages/Topics";
 import Events from "../pages/Events";
 import StockMarket from "../pages/StockMarket";
 import Event from "../pages/EventPages/Event";
+import CompanyPage from "../pages/CompanyPages/CompanyPage";
 const Page = () => {
   return (
     <>
@@ -28,8 +29,8 @@ const Page = () => {
         <Route path="/topics" component={Topics} />
         <Route path="/events" exact component={Events} />
         <Route path="/events/:id" component={Event} />
-        <Route path="/stock-market" component={StockMarket} />
-
+        <Route path="/stock-market" exact component={StockMarket} />
+        <Route path="/stock-market/:id" component={CompanyPage} />
         {/* <Route path="/login" component={LoginPage} /> */}
         {/* <Route component={ErrorPage} /> */}
       </Switch>

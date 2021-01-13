@@ -1,6 +1,6 @@
 export const addCompanyToMarket = (marketIndices, constituents, symbol) => {
   const newMarketIndex = marketIndices.map((indexData) => {
-    return symbol === indexData.symbol ? { ...indexData, constituents: indexData.constituents.concat(constituents) } : indexData
+    return (symbol === indexData.symbol && indexData.constituents.length != constituents.length) ? { ...indexData, constituents: indexData.constituents.concat(constituents) } : indexData
   })
 
   return {

@@ -9,7 +9,7 @@ const list = [
   { name: "Numerology", path: "/numerology" },
   { name: "Movie-Reviews", path: "/movie-reviews" },
   { name: "Events", path: "/events", exact: true },
-  { name: "StockMarket", path: "/stock-market" },
+  { name: "StockMarket", path: "/stock-market", exact: true },
 ];
 
 const Navigation = () => {
