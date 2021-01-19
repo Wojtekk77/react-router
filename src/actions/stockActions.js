@@ -3,7 +3,7 @@ export const addCompanyToMarket = (marketIndices, constituents, symbol) => {
 
     return symbol === indexData.symbol ? { ...indexData, constituents: indexData.constituents.concat(constituents) } : indexData
   })
-  console.log(newMarketIndex)
+  console.log("I am in stockActions", newMarketIndex)
 
   return {
     type: "ADD_COMPANIES_TO_INDEX",
