@@ -1,6 +1,7 @@
 const initialState = {
   isLoggedIn: false,
   isAdmin: false,
+  token: "",
 };
 
 export const authReducer = (state = initialState, action) => {

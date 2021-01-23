@@ -41,6 +41,14 @@ function Events({ EventList, auth, addEvents }) {
     });
   }, []);
 
+  const deleteEvent = (id) => {
+    Axios.delete(api + "/" + id + "/", {
+      headers: { Authorization: `${token}` },
+    }).then((res) => {
+      console.log(res);
+    });
+  };
+
   const events = EventList.map((event) => {
     return (
       <Col key={event.id} md={5} className="card m-1">
@@ -51,6 +59,13 @@ function Events({ EventList, auth, addEvents }) {
         <div>
           Zobacz szczegóły:
           <Link to={`${match.url}/${event.id}`}>event:id {event.id}</Link>
+          {auth.token ? (
+            <button onClick={() => deleteEvent(event.id)}>Delete Event</button>
+          ) : (
+            <button onClick={() => deleteEvent(event.id)}>
+              Delete Event bez tokena w storze
+            </button>
+          )}
         </div>
       </Col>
     );
