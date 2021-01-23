@@ -1,6 +1,7 @@
 import Loading from "../layouts/Loading";
 import styled, { css, keyframes } from "styled-components";
-
+import Auth from "./Auth";
+import Register from "./Register";
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
@@ -26,6 +27,9 @@ function Home() {
       <RotatingDiv rotate={true}>
         <Loading />
       </RotatingDiv>
+      <Auth />
+      <p></p>
+      <Register />
     </>
   );
 }

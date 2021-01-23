@@ -25,15 +25,6 @@ function MovieReviews() {
     ]);
   };
 
-  const api = "https://ticketmaster-django.herokuapp.com/admin/events";
-  const token = "Token 654f6ac41de1b0f152e5cc36a3b6ce2c0b5350cb";
-  const getDataFromApi = () => {
-    Axios.get(api, { headers: { Authorization: `${token}` } }).then((res) => {
-      console.log("res", res);
-      setIsLoaded(!isLoaded);
-    });
-  };
-
   useEffect(() => {
     Axios.get("http://localhost:3001/movie").then((response) => {
       console.log(response.data);
@@ -72,7 +63,7 @@ function MovieReviews() {
         />
         <button onClick={submitReview}>submit</button>
       </div>
-      <button onClick={getDataFromApi}>Get data From API</button>
+      {/* <button onClick={getDataFromApi}>Get data From API</button> */}
       {isLoaded ? <p>true</p> : <p>false</p>}
     </div>
   );

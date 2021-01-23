@@ -10,6 +10,7 @@ const list = [
   { name: "Movie-Reviews", path: "/movie-reviews" },
   { name: "Events", path: "/events", exact: true },
   { name: "StockMarket", path: "/stock-market", exact: true },
+  { name: "AddEvent", path: "/add-event", exact: true },
 ];
 
 const Navigation = () => {

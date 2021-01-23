@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { authAction } from "../actions/authAction";
 import Axios from "axios";
 
-const Auth = () => {
+const Register = () => {
   const state = useSelector((state) => state);
   console.log(state);
   const dispatch = useDispatch();
@@ -14,17 +14,21 @@ const Auth = () => {
   const [token, setToken] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [email, setEmail] = useState("");
 
-  const authLogin = () => {
+  const authRegister = () => {
     console.log(" i am in post auth login");
-    console.log(username, password);
-    Axios.post("https://ticketmaster-django.herokuapp.com/login/", {
-      username: username,
+    console.log(username, password, password2, email);
+    Axios.post("https://ticketmaster-django.herokuapp.com/register/", {
+      email: email,
       password: password,
+      password2: password2,
+      name: username,
     }).then(
       (response) => {
         console.log(response);
-        dispatch(authAction(true, true, response.data.token));
+        // dispatch(authAction(true, true, response.data.token));
       },
       (error) => {
         console.log(error);
@@ -34,6 +38,14 @@ const Auth = () => {
   return (
     <div>
       <h2>{state.auth.token}</h2>
+      <label>EMAIL:</label>
+      <input
+        type="email"
+        name="email"
+        onChange={(e) => {
+          setEmail(e.target.value);
+        }}
+      />
       <label>USERNAME</label>
       <input
         type="text"
@@ -50,14 +62,23 @@ const Auth = () => {
           setPassword(e.target.value);
         }}
       />
+      <label>PASSWORD2:</label>
+      <input
+        type="text"
+        name="password2"
+        onChange={(e) => {
+          setPassword2(e.target.value);
+        }}
+      />
+
       <button onClick={handleAuth} className="btn btn-info">
         {state.auth.isLoggedIn ? "Login" : "Logout"}
       </button>
-      <button onClick={authLogin} className="btn btn-info">
-        get token
+      <button onClick={authRegister} className="btn btn-info">
+        Register
       </button>
     </div>
   );
 };
 
-export default Auth;
+export default Register;

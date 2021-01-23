@@ -18,6 +18,7 @@ import Events from "../pages/Events";
 import StockMarket from "../pages/StockMarket";
 import Event from "../pages/EventPages/Event";
 import CompanyPage from "../pages/CompanyPages/CompanyPage";
+import AddEvent from "../pages/EventPages/AddEvent";
 const Page = () => {
   return (
     <>
@@ -28,9 +29,11 @@ const Page = () => {
         <Route path="/movie-reviews" component={MovieReviews} />
         <Route path="/topics" component={Topics} />
         <Route path="/events" exact component={Events} />
+        <Route path="/add-event" exact component={AddEvent} />
         <Route path="/events/:id" component={Event} />
         <Route path="/stock-market" exact component={StockMarket} />
         <Route path="/stock-market/:id" component={CompanyPage} />
+
         {/* <Route path="/login" component={LoginPage} /> */}
         {/* <Route component={ErrorPage} /> */}
       </Switch>
